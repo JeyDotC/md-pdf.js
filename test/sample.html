@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Example</title>
+        <script src="../bower_components/bower-pdfkit/blob-stream-v0.1.2.js"></script>
+    	<script src="../bower_components/bower-pdfkit/pdfkit-0.7.0.js"></script>
+        <script src="../bower_components/markdown/lib/markdown.js"></script>
+    	<script src="../md-pdf.js"></script>
+    </head>
+    <body>
+        <pre id="MD">
+# Hello World
+## Second level heading
+### Third level heading
+
+This is a pragraph with **bold** and *emphasis*.
+
+* Some list item
+* Another list item
+* Even *more* list items!
+* List item with **bold**.
+
+</pre>
+
+        <iframe id="PDF" width="100%" height="900"></iframe>
+        <script type="text/javascript">
+            var text = document.getElementById("MD").textContent;
+            console.log(markdown.parse(text));
+
+            var stream = mdPdf(markdown.parse(text));
+
+            stream.on('finish', function(){
+                document.getElementById('PDF').src = stream.toBlobURL('application/pdf');
+            });
+        </script>
+    </body>
+</html>
