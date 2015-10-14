@@ -86,7 +86,11 @@
     renderChildren(this, children);
   }
 
-  expose.mdPdf = function(jsonMlTemplate) {
+  handlers.table = function(thildren) {}
+
+  expose.mdPdf = function(text) {
+    var jsonMlTemplate = markdown.parse(text, 'Maruku');
+
     var doc = new PDFDocument();
     var stream = doc.pipe(blobStream());
 
